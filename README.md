@@ -3,4 +3,4 @@
 https://adventofcode.com
 
 ### Years
-- [2021](2021/README.md) (Rust)
+- [2021](2021/) (Rust 🦀)
