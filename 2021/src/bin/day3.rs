@@ -39,36 +39,40 @@ fn part1(input: &Input) -> isize {
     let rotated: Vec<String> = (0..input[0].len())
         .map(|i| input.iter().map(|s| s.chars().nth(i).unwrap()).collect())
         .collect();
-    let gamma_string: String = rotated
-        .iter()
-        .map(|s| {
-            s.chars()
-                .fold(HashMap::new(), |mut freqs, value| {
-                    *freqs.entry(value).or_insert(0) += 1;
-                    freqs
-                })
-                .into_iter()
-                .max_by_key(|&(_, count)| count)
-                .map(|(value, _)| value)
-                .unwrap()
+    let frequencies = rotated.iter().map(|s| {
+        s.chars().fold(HashMap::new(), |mut freqs, value| {
+            *freqs.entry(value).or_insert(0) += 1;
+            freqs
         })
-        .collect();
-    let epsilon_string: String = rotated
-        .iter()
-        .map(|s| {
-            s.chars()
-                .fold(HashMap::new(), |mut freqs, value| {
-                    *freqs.entry(value).or_insert(0) += 1;
-                    freqs
-                })
-                .into_iter()
-                .min_by_key(|&(_, count)| count)
-                .map(|(value, _)| value)
-                .unwrap()
-        })
-        .collect();
-    let gamma = isize::from_str_radix(&gamma_string, 2).unwrap();
-    let epsilon = isize::from_str_radix(&epsilon_string, 2).unwrap();
+    });
+
+    let gamma = isize::from_str_radix(
+        &frequencies
+            .clone()
+            .map(|freq| {
+                freq.into_iter()
+                    .max_by_key(|&(_, count)| count)
+                    .map(|(value, _)| value)
+                    .unwrap()
+            })
+            .collect::<String>(),
+        2,
+    )
+    .unwrap();
+    // could use bitwise not/complement here
+    let epsilon = isize::from_str_radix(
+        &frequencies
+            .map(|freq| {
+                freq.into_iter()
+                    .min_by_key(|&(_, count)| count)
+                    .map(|(value, _)| value)
+                    .unwrap()
+            })
+            .collect::<String>(),
+        2,
+    )
+    .unwrap();
+
     gamma * epsilon
 }
 
