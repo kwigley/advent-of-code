@@ -86,7 +86,7 @@ fn part2(input: &Input) -> i32 {
                 units: i,
             } => {
                 horizontal += i;
-                depth += aim * i;
+                depth += aim * i
             }
             Command {
                 direction: Direction::Up,
