@@ -1,6 +1,5 @@
-use std::collections::HashMap;
-
 use advent_of_code::util::read_lines;
+use std::collections::HashMap;
 
 // --- Day 3: Binary Diagnostic ---
 // The submarine has been making some odd creaking noises, so you
@@ -92,8 +91,8 @@ fn part1(input: &Input) -> isize {
 }
 
 // --- Part Two ---
-// Next, you should verify the life support rating, which can be determined by
-// multiplying the oxygen generator rating by the CO2 scrubber rating.
+// Next, you should verify the life support rating, which can be determined by multiplying the
+// oxygen generator rating by the CO2 scrubber rating.
 
 // Both the oxygen generator rating and the CO2 scrubber rating are values that can be found in
 // your diagnostic report - finding them is the tricky part. Both values are located using a
@@ -102,10 +101,10 @@ fn part1(input: &Input) -> isize {
 // consider just the first bit of those numbers. Then:
 
 // Keep only numbers selected by the bit criteria for the type of rating value for which you are
-// searching. Discard numbers which do not match the bit criteria. If you only have one number
-// left, stop; this is the rating value for which you are searching. Otherwise, repeat the process,
-// considering the next bit to the right. The bit criteria depends on which type of rating value
-// you want to find:
+// searching. Discard numbers which do not match the bit criteria.
+// If you only have one number left, stop; this is the rating value for which you are searching.
+// Otherwise, repeat the process, considering the next bit to the right.
+// The bit criteria depends on which type of rating value you want to find:
 
 // To find oxygen generator rating, determine the most common value (0 or 1) in the current bit
 // position, and keep only numbers with that bit in that position. If 0 and 1 are equally common,
