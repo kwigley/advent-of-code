@@ -22,29 +22,3 @@ pub fn read_ints(path: &str) -> Vec<i32> {
 
     out
 }
-
-// #[macro_export]
-// macro_rules! set(
-//     { $($key:expr),+ } => {
-//         {
-//             let mut m = ::std::collections::HashSet::new();
-//             $(
-//                 m.insert($key);
-//             )+
-//             m
-//         }
-//      };
-// );
-
-// #[macro_export]
-// macro_rules! map(
-//     { $($key:expr => $val:expr),+ } => {
-//         {
-//             let mut m = ::std::collections::HashMap::new();
-//             $(
-//                 m.insert($key, $val);
-//             )+
-//             m
-//         }
-//      };
-// );
