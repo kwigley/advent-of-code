@@ -59,7 +59,6 @@ fn part1(input: &Input) -> isize {
             freqs
         })
     });
-
     let gamma = isize::from_str_radix(
         &frequencies
             .clone()
@@ -108,7 +107,9 @@ fn part1(input: &Input) -> isize {
 
 // To find oxygen generator rating, determine the most common value (0 or 1) in the current bit
 // position, and keep only numbers with that bit in that position. If 0 and 1 are equally common,
-// keep values with a 1 in the position being considered. To find CO2 scrubber rating, determine
+// keep values with a 1 in the position being considered.
+//
+// To find CO2 scrubber rating, determine
 // the least common value (0 or 1) in the current bit position, and keep only numbers with that bit
 // in that position. If 0 and 1 are equally common, keep values with a 0 in the position being
 // considered. For example, to determine the oxygen generator rating value using the same example
@@ -140,8 +141,52 @@ fn part1(input: &Input) -> isize {
 // CO2 scrubber rating, then multiply them together. What is the life support rating of the
 // submarine? (Be sure to represent your answer in decimal, not binary.)
 
-fn part2(input: &Input) -> i32 {
-    todo!()
+fn part2(input: &Input) -> isize {
+    let rotated: Vec<String> = (0..input[0].len())
+        .map(|i| input.iter().map(|s| s.chars().nth(i).unwrap()).collect())
+        .collect();
+    let frequencies = rotated.iter().map(|s| {
+        s.chars().fold(HashMap::new(), |mut freqs, value| {
+            *freqs.entry(value).or_insert(0) += 1;
+            freqs
+        })
+    });
+    let most_common = &frequencies
+        .clone()
+        .map(|freq| {
+            freq.into_iter()
+                .max_by_key(|&(_, count)| count)
+                .map(|(value, _)| value)
+                .unwrap()
+        })
+        .collect::<String>();
+    let least_common = &frequencies
+        .map(|freq| {
+            freq.into_iter()
+                .min_by_key(|&(_, count)| count)
+                .map(|(value, _)| value)
+                .unwrap()
+        })
+        .collect::<String>();
+
+    let oxygen = most_common
+        .chars()
+        .enumerate()
+        .fold(input, |mut include, (i, bit)| {
+            &input
+                .iter()
+                .filter(|&rate| rate.chars().nth(i).unwrap() == bit)
+        });
+    let scrubber = least_common
+        .chars()
+        .enumerate()
+        .fold(input, |mut include, (i, bit)| {
+            &input
+                .iter()
+                .filter(|&rate| rate.chars().nth(i).unwrap() == bit)
+        });
+
+    oxygen * scrubber
 }
 
 type Input = Vec<String>;
