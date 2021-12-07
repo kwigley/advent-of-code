@@ -1,7 +1,3 @@
-# advent-of-code
+# Advent of Code 2021
 
-https://adventofcode.com
-
-### Years
-
-- [2021](2021/) (Rust 🦀)
+https://adventofcode.com solutions written in Rust 🦀
