@@ -32,7 +32,14 @@ pub fn part2(input: String) {
         .rev()
         .scan(nums.clone(), |oxy, i| {
             let one = oxy.iter().filter(|n| *n & 1 << i > 0).count() >= (oxy.len() + 1) / 2;
-            oxy.drain_filter(|n| (*n & 1 << i > 0) != one);
+            let mut x = 0;
+            while x < oxy.len() {
+                if (oxy[x] & 1 << i > 0) != one {
+                    oxy.remove(x);
+                } else {
+                    x += 1;
+                }
+            }
             oxy.first().copied()
         })
         .last()
@@ -42,7 +49,14 @@ pub fn part2(input: String) {
         .rev()
         .scan(nums, |co2, i| {
             let one = co2.iter().filter(|n| *n & 1 << i > 0).count() >= (co2.len() + 1) / 2;
-            co2.drain_filter(|n| (*n & 1 << i > 0) == one);
+            let mut x = 0;
+            while x < co2.len() {
+                if (co2[x] & 1 << i > 0) == one {
+                    co2.remove(x);
+                } else {
+                    x += 1;
+                }
+            }
             co2.first().copied()
         })
         .last()
