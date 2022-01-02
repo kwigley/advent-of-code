@@ -1,5 +1,5 @@
-# Advent of Code 2021
+# Advent of Code
 
-Solutions for https://adventofcode.com/2021 written in Rust 🦀.
+Solutions for https://adventofcode.com
 
-⚠️ Solutions are not optimized and do not handle errors correctly!
+- [solutions](/2021) for [2021](https://adventofcode.com) written in Rust 🦀
