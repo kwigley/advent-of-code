@@ -3,7 +3,7 @@
 const WIDTH: usize = 12;
 const COUNT: usize = 1000;
 
-pub fn part1(input: String) {
+pub fn part1(input: String) -> i32 {
     let gamma = input
         .lines()
         .map(|l| usize::from_str_radix(l, 2).unwrap())
@@ -18,11 +18,10 @@ pub fn part1(input: String) {
         .enumerate()
         .map(|(i, b)| ((b >= COUNT / 2) as u32) << i)
         .sum::<u32>();
-
-    println!("{}", gamma * (!gamma & ((1 << WIDTH) - 1)));
+    (gamma * (!gamma & ((1 << WIDTH) - 1))) as i32
 }
 
-pub fn part2(input: String) {
+pub fn part2(input: String) -> i32 {
     let nums = input
         .lines()
         .map(|l| u32::from_str_radix(l, 2).unwrap())
@@ -61,6 +60,5 @@ pub fn part2(input: String) {
         })
         .last()
         .unwrap();
-
-    println!("{}", oxy * co2)
+    (oxy * co2) as i32
 }

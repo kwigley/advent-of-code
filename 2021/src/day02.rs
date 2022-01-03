@@ -1,6 +1,6 @@
 // https://adventofcode.com/2021/day/2
 
-pub fn part1(input: String) {
+pub fn part1(input: String) -> i32 {
     let (f, d) =
         input
             .lines()
@@ -13,11 +13,10 @@ pub fn part1(input: String) {
                     _ => unreachable!(),
                 }
             });
-
-    println!("{}", f * d)
+    f * d
 }
 
-pub fn part2(input: String) {
+pub fn part2(input: String) -> i32 {
     let (f, d, _) = input.lines().map(|l| l.split_once(" ").unwrap()).fold(
         (0, 0, 0),
         |(f, d, a), (k, v)| match (k, v.parse::<i32>().unwrap()) {
@@ -27,6 +26,5 @@ pub fn part2(input: String) {
             _ => unreachable!(),
         },
     );
-
-    println!("{}", f * d)
+    f * d
 }

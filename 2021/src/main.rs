@@ -5,6 +5,7 @@ use std::io::Write;
 use std::time::{Duration, Instant};
 
 use advent_of_code::get_day;
+use colour::green_ln;
 
 fn fmt_time(ms: f64) -> String {
     if ms <= 1.0 {
@@ -60,7 +61,13 @@ fn main() {
     };
 
     // Read input file
-    let cwd = env::current_dir().unwrap();
+    let mut cwd = env::current_dir().unwrap();
+    if !cwd
+        .iter()
+        .any(|part| part.to_str() == Some(env!("CARGO_MANIFEST_DIR")))
+    {
+        cwd = cwd.join(env!("CARGO_MANIFEST_DIR"));
+    }
     let filename = cwd.join("inputs").join(format!("day{:02}.txt", day_num));
     println!("Reading {}\n", filename.display());
     let input = fs::read_to_string(filename).expect("Error while reading");
@@ -71,13 +78,13 @@ fn main() {
     // Time it
     println!("Running Part 1");
     let part1_start = Instant::now();
-    to_run.0(input.clone());
+    green_ln!("{}", to_run.0(input.clone()));
     let part1_dur = part1_start.elapsed();
     println!("Took {}\n", fmt_dur(part1_dur));
 
     println!("Running Part 2");
     let part2_start = Instant::now();
-    to_run.1(input);
+    green_ln!("{}", to_run.1(input));
     let part2_dur = part2_start.elapsed();
     println!("Took {}", fmt_dur(part2_dur));
 }
